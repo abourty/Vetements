@@ -1,0 +1,47 @@
+<app-menu></app-menu>
+<div class="container">
+<div class="card shadow mb-4">
+<div class="card-body">
+<h1>Liste des vetements</h1>
+<table width="100%">
+<thead>
+<tr>
+<th>Code</th>
+<th>marque</th>
+<th>Categories</th>
+<th>Prix</th>
+<th>Quantité</th>
+<!--<th>modele</th>
+<th>taille</th> -->
+<th>Date insertion</th>
+<th>Approvisionner</th>
+<th *ngIf="authServ.testerAdmin()" > Action </th>
+</tr>
+</thead>
+<tbody *ngFor="let vetement of tab_vet">
+<tr >
+<td>{{vetement.codea}}</td>
+<td>{{vetement.marque }}</td>
+<td>{{vetement.categ.nomCat}}</td>
+<td>{{vetement.prix | number : '1.3'}}</td>
+<td>{{vetement.qte}}</td>
+<td>{{vetement.dateAjout | date:'dd/MM/yyyy'}}</td>
+<!--<td>{{vetement.taille}}</td>
+<td>{{vetement.modele}}</td>-->
+
+<td *ngIf="vetement.qte!=0">non</td>
+<td *ngIf="vetement.qte==0" [ngStyle]="zeroStyle">oui</td>
+
+<td *ngIf="authServ.testerAdmin()">
+    <a class="btn btn-danger" (click)="suppVetement(vetement)" > 
+        <img src="../assets/img/delete.png" height="32" width="32"  ></a>
+    <a class="btn btn-warning" [routerLink]="['/updateVetement',vetement.codea]" >
+       <img src="../assets/img/edit.png" height="32" width="32"></a>
+    </td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+

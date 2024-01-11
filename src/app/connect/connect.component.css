@@ -1,0 +1,8 @@
+.text-center {
+    text-align: "center";
+    }
+    .text-err {
+        color: rgb(47, 74, 163);
+        font-weight: 12px;
+        font-style: italic;
+        }

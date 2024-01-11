@@ -1,0 +1,61 @@
+<app-menu></app-menu>
+<div class="container">
+  <div class="card shadow mb-4">
+  <div class="card-body">
+  <h1>Liste des vetements</h1>
+  <form name="f1">
+    Choisir un critère de recherche :
+    <input type="radio" name="critere" [(ngModel)]="critere" value="categorie"> par Catégorie
+    <input type="radio" name="critere" [(ngModel)]="critere" value="Marque"> par Marque
+    <input type="radio" name="critere" [(ngModel)]="critere" value="code"> par Codea
+    </form><br>
+    <div [ngSwitch]="critere">
+    <form name="f2" class="form-inline">
+    <div class="form-group mx-sm-3 mb-2 mt-2 " *ngSwitchCase="'Marque'">
+    <label>Marque à chercher : </label>
+    <input type="text" class="form-control" name="Marque" class="formcontrol" #MarVetement (keyup)="chercherParMar(MarVetement.value)">
+    </div>
+    <div class="form-group" *ngSwitchCase="'categorie'">
+      Catégorie <select class="form-control form-control-lg" id="codec" name="codec" [(ngModel)]="categRech" (change)="chercherParCateg()">
+    <option *ngFor="let category of categories" value= "{{category.codec}}">{{category.nomCat}}</option>
+    </select>
+    <button type="submit" (click)="reset()" class="btn btn-dark mb-2 ml-2">Reinitialiser</button>
+    </div>
+    <div class="form-group mx-sm-3 mb-2 mt-2 " *ngSwitchCase="'code'">
+      <label>Code à chercher : </label>
+      <input type="text" class="form-control" name="codea" class="formcontrol" #MarVetement  (keyup)="chercherParCode(MarVetement .value)">
+      <button type="submit" (click)="reset()" class="btn btn-dark mb-2 ml-2">Reinitialiser</button>
+      </div>
+    </form>
+
+    <table width="100%">
+    <thead>
+    <tr>
+    <th>Codea</th>
+    <th>marque</th>
+    <th>Prix</th>
+    <th>Categories</th>
+    <th>Quantité</th>
+    <!--<th>modele</th>
+    <th>taille</th>-->
+    <th>Date insertion</th>
+     </tr>
+    </thead>
+    <tbody *ngFor="let vetement of vetement">
+    <tr >
+    <td>{{vetement.codea}}</td>
+    <td>{{vetement.marque }}</td>
+    <td>{{vetement.categ.nomCat}}</td>
+    <td>{{vetement.prix }}</td>
+    <td>{{vetement.qte}}</td>
+    <td>{{vetement.dateAjout | date:'dd/MM/yyyy'}}</td>
+   <!-- <td>{{vetement.taille}}</td>
+    <td>{{vetement.modele}}</td>-->
+    </tr>
+    </tbody>
+    </table>
+    </div>
+    </div>
+    </div>
+    
+    
